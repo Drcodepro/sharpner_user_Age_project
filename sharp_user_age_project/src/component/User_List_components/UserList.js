@@ -1,0 +1,10 @@
+
+import './UserList.css'
+function UserList(props){
+   return(<ul className='list-container'>
+   {props.userData.map((data)=>{
+     return <li key={data.name}>{data.name}({data.age} years old)</li>
+    })}
+   </ul>)
+}
+export default UserList;
