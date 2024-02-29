@@ -1,0 +1,23 @@
+.form-control {
+    margin: 0.5rem 0;
+    border:solid 1px black;
+    border-radius: 5px;
+    width: 50%;
+    background-color: beige;
+  }
+  
+  .form-control label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  
+  .form-control input{
+    width:90%;
+    border: 1px solid #ccc;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+    margin: 0.5rem;
+  }
+  
+  

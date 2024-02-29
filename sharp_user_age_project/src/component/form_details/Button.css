@@ -1,0 +1,10 @@
+.submitButton{
+    background-color: rgb(243, 33, 18);
+    color: white;
+    font-size: 1rem;
+    margin: 0.5rem; 
+    border: solid black 1px;
+    border-radius:5px;
+    width: 100px;
+    height: 30px;
+}
