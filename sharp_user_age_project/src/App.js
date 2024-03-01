@@ -4,7 +4,7 @@ import './App.css';
 import InputForm from './component/form_details/InputForm.js';
 import UserList from './component/User_List_components/UserList.js';
 
-let userData = [{ name: "raja", age: 21 }];
+let userData = [{ name: "raja", age: 21,collage:"svn" }];
 
 function App() {
 

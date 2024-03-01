@@ -1,21 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useRef } from "react";
 import "./FormData.css";
 import Button from "./Button";
 import ErrorPop from "../ErrorMassage/ErrorPop";
 
 function FormData(props) {
-  const [nameData, setName] = useState("");
-  const [ageData, setAge] = useState("");
+  const collageInput = useRef();
+  const nameInput = useRef();
+  const ageInput = useRef();
+
+
   const [showError, setShowError] = useState(false);
 
   const[errorMsg,seterrorMsg] = useState("")
-
-  const handleAgeInput = (event) => {
-    setAge(event.target.value);
-  };
-  const handleNameInput = (event) => {
-    setName(event.target.value);
-  };
 
   const errorPopHandle=()=>{
     setShowError((prevState) => {
@@ -27,32 +23,42 @@ function FormData(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(nameData === "" && ageData === ""){
-      seterrorMsg("invalid name! OR invalid Age!");
+    if(nameInput.current.value === "" && ageInput.current.value === "" && collageInput.current.value ===""){
+      seterrorMsg("invalid name! OR invalid Age! OR invalid collage");
       setShowError((prevState) => {
         return !prevState;
       });
     }
-    else if (nameData === "") {
+    else if (nameInput.current.value === "") {
       seterrorMsg("invalid name!");
       setShowError((prevState) => {
         return !prevState;
       });
     }
-    else if(ageData === ""){
+    else if(ageInput.current.value === "" || +ageInput.current.value<1){
       seterrorMsg("invalid Age!");
+      setShowError((prevState) => {
+        return !prevState;
+      });
+    }
+    else if(collageInput.current.value===""){
+      seterrorMsg("invalid collage name!");
       setShowError((prevState) => {
         return !prevState;
       });
     }
      else {
       let newData = {
-        name: nameData,
-        age: ageData,
+        name: nameInput.current.value,
+        age: ageInput.current.value,
+        collage:collageInput.current.value
       };
+
       props.changeDataSubmit(newData);
-      setAge("");
-      setName("");
+
+      nameInput.current.value="";
+      ageInput.current.value="";
+      collageInput.current.value="";
     }
   };
 
@@ -62,9 +68,11 @@ function FormData(props) {
       <form className="form-control" onSubmit={handleSubmit}>
         <div>
           <label>username</label>
-          <input type="text" value={nameData} onChange={handleNameInput} />
+          <input type="text" ref={nameInput}/>
           <label>Age(years)</label>
-          <input type="number" value={ageData} onChange={handleAgeInput} />
+          <input type="number" ref={ageInput}/>
+          <label>collage</label>
+          <input type='text' ref={collageInput}/>
         </div>
         <Button>add details</Button>
       </form>
