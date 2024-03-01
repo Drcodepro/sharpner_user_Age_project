@@ -1,37 +1,74 @@
-import React, { useState } from 'react';
-import './FormData.css'
-import Button from './Button';
-function FormData(props){
+import React, { useState } from "react";
+import "./FormData.css";
+import Button from "./Button";
+import ErrorPop from "../ErrorMassage/ErrorPop";
 
-const [nameData,setName]=useState('');
-const[ageData,setAge] = useState('');
+function FormData(props) {
+  const [nameData, setName] = useState("");
+  const [ageData, setAge] = useState("");
+  const [showError, setShowError] = useState(false);
 
-const handleAgeInput=(event)=>{
-  setAge(event.target.value);
-}
-const handleNameInput=(event)=>{
-  setName(event.target.value);
-}
+  const[errorMsg,seterrorMsg] = useState("")
 
-  const handleSubmit=(event)=>{
-    event.preventDefault();
-    let newData ={
-      name:nameData,
-      age:ageData
-    }
-    props.changeDataSubmit(newData)
-    setAge('');
-    setName('');
+  const handleAgeInput = (event) => {
+    setAge(event.target.value);
+  };
+  const handleNameInput = (event) => {
+    setName(event.target.value);
+  };
+
+  const errorPopHandle=()=>{
+    setShowError((prevState) => {
+      return !prevState;
+    });
   }
 
-    return( <form className='form-control' onSubmit={handleSubmit}>
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(nameData === "" && ageData === ""){
+      seterrorMsg("invalid name! OR invalid Age!");
+      setShowError((prevState) => {
+        return !prevState;
+      });
+    }
+    else if (nameData === "") {
+      seterrorMsg("invalid name!");
+      setShowError((prevState) => {
+        return !prevState;
+      });
+    }
+    else if(ageData === ""){
+      seterrorMsg("invalid Age!");
+      setShowError((prevState) => {
+        return !prevState;
+      });
+    }
+     else {
+      let newData = {
+        name: nameData,
+        age: ageData,
+      };
+      props.changeDataSubmit(newData);
+      setAge("");
+      setName("");
+    }
+  };
+
+  return (
+    <>
+      {showError ? <ErrorPop errormsg={errorMsg} errorPopHandle={errorPopHandle} /> : null}
+      <form className="form-control" onSubmit={handleSubmit}>
         <div>
           <label>username</label>
           <input type="text" value={nameData} onChange={handleNameInput} />
           <label>Age(years)</label>
-          <input type="number" value={ageData} onChange={handleAgeInput}/>
+          <input type="number" value={ageData} onChange={handleAgeInput} />
         </div>
-         <Button/>
-      </form>)
+        <Button>add details</Button>
+      </form>
+    </>
+  );
 }
 export default FormData;
