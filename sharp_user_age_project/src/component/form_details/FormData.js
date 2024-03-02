@@ -8,54 +8,50 @@ function FormData(props) {
   const nameInput = useRef();
   const ageInput = useRef();
 
-
   const [showError, setShowError] = useState(false);
-
-  const[errorMsg,seterrorMsg] = useState("")
+  const[errorMsg,seterrorMsg] = useState("");
 
   const errorPopHandle=()=>{
-    setShowError((prevState) => {
+      setShowError((prevState) => {
       return !prevState;
     });
   }
 
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if(nameInput.current.value === "" && ageInput.current.value === "" && collageInput.current.value ===""){
-      seterrorMsg("invalid name! OR invalid Age! OR invalid collage");
-      setShowError((prevState) => {
+        seterrorMsg("invalid name! OR invalid Age! OR invalid collage");
+        setShowError((prevState) => {
         return !prevState;
       });
     }
     else if (nameInput.current.value === "") {
-      seterrorMsg("invalid name!");
-      setShowError((prevState) => {
+        seterrorMsg("invalid name!");
+        setShowError((prevState) => {
         return !prevState;
       });
     }
     else if(ageInput.current.value === "" || +ageInput.current.value<1){
-      seterrorMsg("invalid Age!");
-      setShowError((prevState) => {
+        seterrorMsg("invalid Age!");
+        setShowError((prevState) => {
         return !prevState;
       });
     }
     else if(collageInput.current.value===""){
-      seterrorMsg("invalid collage name!");
-      setShowError((prevState) => {
+        seterrorMsg("invalid collage name!");
+        setShowError((prevState) => {
         return !prevState;
       });
     }
      else {
-      let newData = {
+        let newData = {
         name: nameInput.current.value,
         age: ageInput.current.value,
         collage:collageInput.current.value
       };
 
       props.changeDataSubmit(newData);
-
       nameInput.current.value="";
       ageInput.current.value="";
       collageInput.current.value="";
