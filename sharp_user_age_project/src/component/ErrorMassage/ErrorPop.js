@@ -6,7 +6,7 @@ import Button from '../form_details/Button';
 function ErrorPop(props) {
     
     return ReactDOM.createPortal(<>
-    <div className='backDrop' onClick={props.errorPopHandle}/>
+       <div className='backDrop' onClick={props.errorPopHandle}/>
         <div className='errorPopBox'>
             <h2>Error</h2>
             <p>{props.errormsg} </p>
